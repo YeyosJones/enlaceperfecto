@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enlace Perfecto – Revista Digital</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:#0d0d0d;color:#fff;font-family:'Inter',sans-serif;display:flex;flex-direction:column}
+.topbar{background:#080808;border-bottom:1px solid #1a1a1a;padding:10px 22px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.tb-brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.tb-brand img{height:38px;width:38px;object-fit:contain;border-radius:50%;border:2px solid #222}
+.tb-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:#fff;letter-spacing:1px;line-height:1}
+.tb-name em{color:#FFC107;font-style:normal}
+.tb-info{flex:1;text-align:center;font-size:.72rem;color:#333}
+.tb-info strong{color:#F57C00}
+.tb-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tb-pag{font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:#444;min-width:80px;text-align:center}
+.tb-pag em{color:#F57C00;font-style:normal}
+.tb-btn{background:#161616;border:1px solid #2a2a2a;color:#666;padding:8px 16px;border-radius:4px;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tb-btn:hover:not([disabled]){background:#F57C00;color:#fff;border-color:#F57C00}
+.tb-btn[disabled]{opacity:.2;cursor:not-allowed}
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:22px 72px 16px;position:relative}
+.stage::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 55% 45%,rgba(245,124,0,.06) 0%,transparent 60%)}
+.arr{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;background:#F57C00;color:#fff;border:none;cursor:pointer;font-size:1.2rem;z-index:50;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 4px 18px rgba(245,124,0,.4)}
+.arr:hover:not([disabled]){background:#FF9800;transform:translateY(-50%) scale(1.1)}
+.arr[disabled]{background:#1a1a1a;box-shadow:none;opacity:.3;cursor:not-allowed}
+.arr[disabled]:hover{transform:translateY(-50%)}
+.arr-l{left:14px}.arr-r{right:14px}
+.book{position:relative;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.9)}
+.book::after{content:'';position:absolute;bottom:-28px;left:8%;right:8%;height:36px;background:radial-gradient(ellipse,rgba(0,0,0,.8) 0%,transparent 70%);pointer-events:none;border-radius:50%}
+.spine{position:absolute;top:0;bottom:0;left:calc(50% - 7px);width:14px;z-index:100;background:linear-gradient(to right,#000,#2a2a2a 50%,#000);pointer-events:none;display:flex;align-items:center;justify-content:center}
+.spine span{font-family:'Bebas Neue',sans-serif;font-size:.38rem;letter-spacing:2.5px;color:rgba(245,124,0,.25);white-space:nowrap;transform:rotate(90deg)}
+.spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;opacity:0;pointer-events:none;transition:opacity .15s}
+.spread.active{opacity:1;pointer-events:auto;position:relative}
+.half{width:100%;height:100%;overflow:hidden;position:relative;background:#111}
+.half img{width:100%;height:100%;object-fit:cover;display:block}
+.ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:28px;background:linear-gradient(145deg,#0d0d0d,#131313)}
+.ph-n{font-family:'Bebas Neue',sans-serif;font-size:min(8vw,5rem);color:rgba(245,124,0,.1);line-height:1;letter-spacing:4px}
+.ph-t{font-size:.72rem;color:#222;font-weight:700;text-transform:uppercase;letter-spacing:2px}
+.ph-box{background:#111;border:1px solid #1e1e1e;border-radius:5px;padding:10px 14px;font-size:.62rem;color:#222;line-height:1.7;max-width:190px}
+.flip-overlay{position:absolute;top:0;bottom:0;width:50%;z-index:90;pointer-events:none;transform-origin:right center;animation:flipL .5s cubic-bezier(.645,.045,.355,1) forwards}
+.flip-overlay.right{left:50%;transform-origin:left center;animation:flipR .5s cubic-bezier(.645,.045,.355,1) forwards}
+.flip-overlay.back{animation:flipLB .5s cubic-bezier(.645,.045,.355,1) forwards}
+.flip-overlay.back.right{animation:flipRB .5s cubic-bezier(.645,.045,.355,1) forwards}
+@keyframes flipL{from{transform:rotateY(0deg)}to{transform:rotateY(-180deg)}}
+@keyframes flipR{from{transform:rotateY(0deg)}to{transform:rotateY(180deg)}}
+@keyframes flipLB{from{transform:rotateY(-180deg)}to{transform:rotateY(0deg)}}
+@keyframes flipRB{from{transform:rotateY(180deg)}to{transform:rotateY(0deg)}}
+.dots-bar{background:#080808;border-top:1px solid #141414;padding:11px 24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:14px}
+.dot{width:8px;height:8px;border-radius:50%;background:#1e1e1e;border:1px solid #282828;cursor:pointer;transition:all .25s;flex-shrink:0}
+.dot.on{background:#F57C00;border-color:#F57C00;width:24px;border-radius:4px}
+.hint{font-size:.62rem;color:#1e1e1e;white-space:nowrap}
+@media(max-width:640px){.stage{padding:14px 44px 12px}.arr{width:34px;height:34px;font-size:.85rem}.arr-l{left:4px}.arr-r{right:4px}.tb-info{display:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="tb-brand">
+    <img src="fotos/logo.png" alt="EP" onerror="this.src='fotos/logo.jpg'">
+    <div class="tb-name">ENLACE <em>PERFECTO</em></div>
+  </a>
+  <div class="tb-info">Edición <strong id="t-ed">—</strong> · <span id="t-mes">—</span></div>
+  <div class="tb-ctrl">
+    <span class="tb-pag">Pág. <em id="t-pn">1</em> / <span id="t-pt">—</span></span>
+    <button class="tb-btn" id="btn-prev" onclick="prevS()" disabled>&#8592; Anterior</button>
+    <button class="tb-btn" id="btn-next" onclick="nextS()">Siguiente &#8594;</button>
+  </div>
+</div>
+
+<div class="stage" id="stage">
+  <button class="arr arr-l" id="arr-l" onclick="prevS()" disabled>&#8592;</button>
+  <button class="arr arr-r" id="arr-r" onclick="nextS()">&#8594;</button>
+  <div class="book" id="book">
+    <div class="spine"><span id="spine-lbl">ENLACE PERFECTO</span></div>
+  </div>
+</div>
+
+<div class="dots-bar">
+  <span class="hint">← teclas · swipe →</span>
+  <div id="dots" style="display:flex;gap:7px;"></div>
+  <span class="hint" id="hint2"></span>
+</div>
+
+<script>
+// ╔══════════════════════════════════════════════════════════╗
+// ║   ▼▼▼  CAMBIA AQUÍ CADA QUINCENA  ▼▼▼                  ║
+// ╚══════════════════════════════════════════════════════════╝
+
+var EDICION = {
+  numero: "01",
+  mes: "Julio 2026",
+
+  // Una ruta por página en orden.
+  // Pon tus archivos en fotos/ed01/
+  // Si una página no está lista pon: ""
+  paginas: [
+    "fotos/ed01/portada.png",
+    "fotos/ed01/1.png",
+    "fotos/ed01/2.png",
+    "fotos/ed01/3.png",
+    "fotos/ed01/4.png",
+    "fotos/ed01/5.png",
+    "fotos/ed01/6.png",
+    "fotos/ed01/contraportada.png"
+  ]
+};
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║   ▲▲▲  FIN CONFIGURACIÓN — no tocar abajo  ▲▲▲         ║
+// ╚══════════════════════════════════════════════════════════╝
+
+var TOTAL   = EDICION.paginas.length;
+var SPREADS = Math.ceil(TOTAL / 2);
+var cur     = 0;
+var busy    = false;
+
+function getEl(id) { return document.getElementById(id); }
+
+function makeEl(tag, cls) {
+  var e = document.createElement(tag);
+  if (cls) e.className = cls;
+  return e;
+}
+
+function sizeBook() {
+  var st = getEl('stage');
+  var bk = getEl('book');
+  var sw = st.clientWidth - 40;
+  var sh = st.clientHeight - 10;
+  var ratio = 22 / 17;
+  var w = sw;
+  var h = w / ratio;
+  if (h > sh) { h = sh; w = h * ratio; }
+  bk.style.width  = Math.floor(w) + 'px';
+  bk.style.height = Math.floor(h) + 'px';
+}
+
+function makePH(num) {
+  var d = makeEl('div', 'ph');
+  var v = (num >= 1 && num <= TOTAL);
+  d.innerHTML =
+    '<div class="ph-n">' + (v ? num : '') + '</div>' +
+    '<div class="ph-t">' + (v ? 'P\u00e1gina ' + num : '\u2014') + '</div>' +
+    '<div class="ph-box">Agrega la imagen en<br><b>revista.html</b><br>en la secci\u00f3n <b>paginas:</b></div>';
+  return d;
+}
+
+function makeHalf(idx) {
+  var half = makeEl('div', 'half');
+  var src  = (idx >= 0 && idx < TOTAL) ? EDICION.paginas[idx] : '';
+
+  if (src && src.trim() !== '') {
+    var img  = document.createElement('img');
+    img.alt  = 'Pag ' + (idx + 1);
+    img.src  = src;
+    img.onerror = function() {
+      half.innerHTML = '';
+      half.appendChild(makePH(idx + 1));
+    };
+    half.appendChild(img);
+  } else {
+    half.appendChild(makePH(idx + 1));
+  }
+  return half;
+}
+
+function build() {
+  var book = getEl('book');
+  var dots = getEl('dots');
+
+  for (var i = 0; i < SPREADS; i++) {
+    var sp = makeEl('div', i === 0 ? 'spread active' : 'spread');
+    sp.id  = 'sp' + i;
+    sp.appendChild(makeHalf(i * 2));
+    sp.appendChild(makeHalf(i * 2 + 1));
+    book.appendChild(sp);
+
+    var dot = makeEl('div', i === 0 ? 'dot on' : 'dot');
+    dot.title   = 'Pags. ' + (i * 2 + 1) + '-' + Math.min(i * 2 + 2, TOTAL);
+    dot.onclick = (function(idx) { return function() { goTo(idx); }; })(i);
+    dots.appendChild(dot);
+  }
+
+  getEl('t-ed').textContent   = '#' + EDICION.numero;
+  getEl('t-mes').textContent  = EDICION.mes;
+  getEl('t-pt').textContent   = TOTAL;
+  getEl('hint2').textContent  = SPREADS + ' spreads - ' + TOTAL + ' pags.';
+  getEl('spine-lbl').textContent = 'ENLACE PERFECTO ED.' + EDICION.numero;
+
+  sizeBook();
+  updateUI();
+}
+
+function updateUI() {
+  getEl('t-pn').textContent = cur * 2 + 1;
+  getEl('btn-prev').disabled = (cur === 0);
+  getEl('arr-l').disabled    = (cur === 0);
+  getEl('btn-next').disabled = (cur === SPREADS - 1);
+  getEl('arr-r').disabled    = (cur === SPREADS - 1);
+  var allDots = document.querySelectorAll('.dot');
+  for (var i = 0; i < allDots.length; i++) {
+    allDots[i].classList.toggle('on', i === cur);
+  }
+}
+
+function animFlip(fwd, cb) {
+  var book = getEl('book');
+
+  var olClass = fwd ? 'flip-overlay'       : 'flip-overlay back';
+  var orClass = fwd ? 'flip-overlay right' : 'flip-overlay right back';
+
+  var ol = makeEl('div', olClass);
+  var or = makeEl('div', orClass);
+  ol.style.background = '#1a1a1a';
+  or.style.background = '#1a1a1a';
+
+  book.appendChild(ol);
+  book.appendChild(or);
+
+  setTimeout(function() {
+    ol.remove();
+    or.remove();
+    cb();
+  }, 480);
+}
+
+function goTo(t) {
+  if (t === cur || t < 0 || t >= SPREADS || busy) return;
+  busy = true;
+
+  getEl('sp' + cur).classList.remove('active');
+
+  animFlip(t > cur, function() {
+    cur = t;
+    getEl('sp' + cur).classList.add('active');
+    updateUI();
+    busy = false;
+  });
+}
+
+function nextS() { goTo(cur + 1); }
+function prevS() { goTo(cur - 1); }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextS();
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   prevS();
+  if (e.key === 'Escape') history.back();
+});
+
+var swipeX = 0;
+document.addEventListener('touchstart', function(e) {
+  swipeX = e.touches[0].clientX;
+}, { passive: true });
+document.addEventListener('touchend', function(e) {
+  var dx = e.changedTouches[0].clientX - swipeX;
+  if (Math.abs(dx) > 40) { if (dx < 0) nextS(); else prevS(); }
+}, { passive: true });
+
+window.addEventListener('resize', sizeBook);
+
+build();
+</script>
+</body>
+</html>
