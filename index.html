@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enlace Perfecto – Información local, conexión real</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;900&family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--K:#0d0d0d;--W:#fff;--O:#F57C00;--OV:#FF9800;--Y:#FFC107;--CR:#FFF8F0;--GR:#6b6b6b;--GL:#f2f2f2}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--W);color:var(--K);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;background:var(--K);height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;border-bottom:2px solid #181818}
+.nl{display:flex;align-items:center;gap:12px;text-decoration:none}
+.nl img{height:46px;width:46px;object-fit:contain;border-radius:50%;border:2px solid #222}
+.nl-t{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--W);line-height:1;letter-spacing:1px}
+.nl-t em{color:var(--Y);font-style:normal}
+nav ul{list-style:none;display:flex;gap:28px}
+nav ul a{text-decoration:none;color:#888;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;transition:color .2s}
+nav ul a:hover{color:var(--OV)}
+.ncta{background:var(--O)!important;color:var(--W)!important;padding:9px 18px;border-radius:4px}
+.ncta:hover{background:var(--OV)!important}
+
+/* HERO */
+#inicio{min-height:100vh;background:var(--K);display:flex;align-items:center;padding:80px 6vw 60px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-120px;right:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(245,124,0,.13) 0%,transparent 65%);pointer-events:none}
+.hero-glow2{position:absolute;bottom:-80px;left:-60px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,193,7,.06) 0%,transparent 65%);pointer-events:none}
+.hero-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;width:100%;position:relative;z-index:1}
+.h-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(245,124,0,.12);border:1px solid rgba(245,124,0,.28);color:var(--O);font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:22px}
+.h-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.4rem,7vw,6.5rem);line-height:.9;color:var(--W);margin-bottom:14px}
+.h-title .o{color:var(--O)}.h-title .y{color:var(--Y)}
+.h-slogan{font-family:'Dancing Script',cursive;font-size:1.55rem;color:var(--Y);margin-bottom:24px;opacity:.9}
+.h-desc{color:#888;font-size:.97rem;line-height:1.75;max-width:460px;margin-bottom:36px}
+.h-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:42px}
+.bp{display:inline-flex;align-items:center;gap:8px;background:var(--O);color:var(--W);padding:14px 28px;border-radius:5px;font-weight:700;font-size:.93rem;text-decoration:none;transition:background .2s,transform .15s}
+.bp:hover{background:var(--OV);transform:translateY(-2px)}
+.bs{display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(245,124,0,.45);color:#ccc;padding:12px 26px;border-radius:5px;font-weight:600;font-size:.92rem;text-decoration:none;transition:all .2s}
+.bs:hover{border-color:var(--O);color:var(--W)}
+.h-stats{display:flex;gap:34px;padding-top:34px;border-top:1px solid #1e1e1e}
+.hs-n{font-family:'Bebas Neue',sans-serif;font-size:2.1rem;color:var(--O);line-height:1}
+.hs-l{font-size:.68rem;color:#444;text-transform:uppercase;letter-spacing:1.5px;margin-top:3px}
+.hero-right{display:flex;justify-content:center;align-items:center;position:relative}
+.hero-ring{position:absolute;width:370px;height:370px;border-radius:50%;border:1px solid rgba(245,124,0,.14);animation:rp 4s ease-in-out infinite}
+.hero-ring2{position:absolute;width:460px;height:460px;border-radius:50%;border:1px solid rgba(245,124,0,.06);animation:rp 4s ease-in-out infinite .9s}
+@keyframes rp{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:.4}}
+.hero-logo{width:clamp(220px,30vw,390px);position:relative;z-index:2;filter:drop-shadow(0 24px 48px rgba(245,124,0,.24));animation:fl 3.8s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-14px) rotate(1deg)}}
+
+/* REVISTA */
+#revista{padding:96px 6vw;background:linear-gradient(180deg,#0d0d0d 0%,#111 60%,#161616 100%);position:relative}
+#revista::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--O),transparent)}
+.rev-header{text-align:center;margin-bottom:44px}
+.rev-ey{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--O);margin-bottom:12px}
+.rev-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,5vw,4rem);color:var(--W);letter-spacing:3px;line-height:1;margin-bottom:14px}
+.rev-title em{color:var(--O);font-style:normal}
+.rev-sub{color:#555;font-size:.95rem;max-width:480px;margin:0 auto}
+.revista-card{display:block;text-decoration:none;max-width:900px;margin:32px auto 0;background:#0a0a0a;border-radius:14px;border:1px solid #1e1e1e;overflow:hidden;transition:border-color .3s,box-shadow .3s;box-shadow:0 20px 60px rgba(0,0,0,.7)}
+.revista-card:hover{border-color:var(--O);box-shadow:0 24px 80px rgba(245,124,0,.2)}
+.rc-toolbar{background:#111;border-bottom:1px solid #1e1e1e;padding:12px 22px;display:flex;align-items:center;justify-content:space-between}
+.rc-dots{display:flex;gap:7px}
+.rc-dot{width:12px;height:12px;border-radius:50%}
+.rc-toolbar-title{font-size:.75rem;color:#333;font-weight:500}
+.rc-badge{background:rgba(245,124,0,.15);color:var(--O);font-size:.65rem;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:20px;border:1px solid rgba(245,124,0,.25)}
+.rc-pages{display:grid;grid-template-columns:1fr 1fr;position:relative;aspect-ratio:2.2/1}
+.rc-spine{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:12px;z-index:5;background:linear-gradient(to right,#000,#1a1a1a 40%,#222 50%,#1a1a1a 60%,#000);box-shadow:0 0 16px rgba(0,0,0,1)}
+.rc-left{position:relative;overflow:hidden;background:var(--K)}
+.rc-left img{width:100%;height:100%;object-fit:cover;display:block}
+.rc-cover-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6% 8%;background:rgba(0,0,0,.55);text-align:center}
+.rc-logo{width:22%;margin-bottom:5%;filter:drop-shadow(0 4px 10px rgba(245,124,0,.4))}
+.rc-cover-name{font-family:'Bebas Neue',sans-serif;font-size:3.5%;color:var(--W);letter-spacing:.12em;line-height:.9}
+.rc-cover-name em{color:var(--O);font-style:normal;display:block;font-size:.65em}
+.rc-cover-sl{font-family:'Dancing Script',cursive;color:var(--Y);font-size:1.8%;opacity:.85;margin-top:3%}
+.rc-right{background:var(--W);padding:5% 6%;display:flex;flex-direction:column}
+.rc-right-head{background:var(--K);margin:-5% -6% 0;padding:3% 6%;display:flex;justify-content:space-between;align-items:center;margin-bottom:4%}
+.rc-right-head span{font-family:'Bebas Neue',sans-serif;font-size:1.2%;color:var(--W);letter-spacing:.1em}
+.rc-right-head span em{color:var(--O);font-style:normal}
+.rc-right-head small{font-size:.8%;color:#333}
+.rc-item{border-bottom:1px solid #f0f0f0;padding:2% 0}
+.rc-item:last-child{border-bottom:none}
+.rc-pag{font-size:.65%;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--O);margin-bottom:.3%}
+.rc-item strong{font-family:'Playfair Display',serif;font-size:1.1%;color:var(--K);display:block;margin-bottom:.3%}
+.rc-item p{font-size:.85%;color:#888;line-height:1.5}
+.rc-cta{background:#111;border-top:1px solid #1e1e1e;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.rc-cta-txt{color:#444;font-size:.82rem}
+.rc-cta-txt strong{color:var(--W)}
+.rc-open-btn{display:inline-flex;align-items:center;background:var(--O);color:var(--W);padding:11px 24px;border-radius:5px;font-weight:700;font-size:.9rem;white-space:nowrap;flex-shrink:0}
+.revista-card:hover .rc-open-btn{background:var(--OV)}
+
+/* MEDIOS */
+#medios{padding:96px 6vw;background:var(--CR)}
+.ey{font-size:.7rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--O);margin-bottom:10px}
+.sec-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);margin-bottom:14px}
+.sub{color:var(--GR);font-size:.97rem;max-width:520px;line-height:1.75}
+.sh{margin-bottom:50px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:880px}
+.mc{background:var(--W);border-radius:12px;padding:38px 32px;border:2px solid transparent;transition:all .25s;position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--O)}
+.mc:hover{border-color:var(--O);box-shadow:0 12px 36px rgba(245,124,0,.12);transform:translateY(-5px)}
+.mc-ico{font-size:2.5rem;margin-bottom:16px}
+.mc-tag{display:inline-block;background:var(--O);color:var(--W);font-size:.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:3px;margin-bottom:12px}
+.mc h3{font-family:'Bebas Neue',sans-serif;font-size:1.65rem;margin-bottom:10px}
+.mc p{color:var(--GR);font-size:.9rem;line-height:1.65}
+.mc-badge{margin-top:16px;display:inline-flex;align-items:center;gap:6px;background:#fff3e0;color:var(--O);padding:5px 12px;border-radius:20px;font-size:.76rem;font-weight:700}
+
+/* TARIFAS */
+#anunciate{padding:96px 6vw;background:var(--K);color:var(--W)}
+#anunciate .sec-t{color:var(--W)}
+#anunciate .sub{color:#555}
+.ttabs{display:flex;margin-bottom:36px;border:1px solid #2a2a2a;border-radius:7px;overflow:hidden;max-width:340px}
+.tbt{flex:1;padding:10px;background:transparent;border:none;color:#555;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .2s}
+.tbt.on{background:var(--O);color:var(--W)}
+.tc{display:none}.tc.on{display:block}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:820px}
+.tcard{background:#161616;border:1px solid #222;border-radius:10px;padding:28px 20px;text-align:center;transition:all .25s;position:relative}
+.tcard.feat{border-color:var(--O);background:#170e00}
+.tcard:hover{border-color:var(--O);transform:translateY(-4px)}
+.tbadge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--O);color:var(--W);font-size:.62rem;font-weight:700;letter-spacing:.5px;padding:3px 12px;border-radius:20px;white-space:nowrap}
+.tsize{color:#555;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.tvis{margin:12px auto;border:2px dashed #2a2a2a;background:#111;border-radius:3px}
+.tprice{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--OV);line-height:1}
+.tprice span{font-size:1rem;color:#444}
+.tsave{margin-top:7px;background:rgba(255,193,7,.1);color:var(--Y);font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:3px;display:inline-block}
+.dbox{margin-top:46px;background:#161616;border:1px solid #222;border-radius:10px;padding:28px 32px;display:flex;gap:24px;align-items:flex-start;max-width:820px}
+.dbox h3{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--OV);margin-bottom:9px}
+.dbox ul{list-style:none}
+.dbox li{color:#aaa;font-size:.88rem;padding:4px 0;display:flex;align-items:flex-start;gap:9px}
+.dbox li::before{content:'✓';color:var(--O);font-weight:700;flex-shrink:0}
+
+/* BENEFICIOS */
+#beneficios{padding:96px 6vw;background:var(--W)}
+.bg2{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:940px}
+.bi{display:flex;gap:14px;align-items:flex-start;padding:24px;border-radius:10px;background:var(--GL);transition:background .2s}
+.bi:hover{background:#fff3e0}
+.bin{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--O);line-height:1;flex-shrink:0}
+.bi h4{font-size:.92rem;font-weight:700;margin-bottom:4px}
+.bi p{color:var(--GR);font-size:.82rem;line-height:1.6}
+
+/* BANNER */
+.dbanner{background:linear-gradient(135deg,var(--O),#c75000);padding:56px 6vw;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.dbanner h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.5vw,2.6rem);color:var(--W);line-height:1;max-width:480px}
+.dbanner p{color:rgba(255,255,255,.82);font-size:.92rem;margin-top:10px}
+
+/* CONTACTO */
+#contacto{padding:96px 6vw;background:var(--K);color:var(--W)}
+#contacto .sec-t{color:var(--W)}
+#contacto .sub{color:#444}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:880px;align-items:start}
+.citems{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.cit{display:flex;align-items:center;gap:14px;padding:16px 20px;background:#161616;border-radius:9px;border:1px solid #222;text-decoration:none;color:var(--W);transition:all .2s}
+.cit:hover{border-color:var(--O);background:#170e00}
+.cit-ico{font-size:1.4rem;flex-shrink:0}
+.cit-l{font-size:.68rem;color:#444;text-transform:uppercase;letter-spacing:1px}
+.cit-v{font-weight:700;font-size:.93rem}
+.cform{margin-top:28px}
+.fr{margin-bottom:14px}
+.fr label{display:block;font-size:.72rem;color:#444;margin-bottom:5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.fr input,.fr textarea,.fr select{width:100%;background:#161616;border:1px solid #2a2a2a;border-radius:5px;padding:12px 14px;color:var(--W);font-size:.9rem;font-family:inherit;transition:border-color .2s;resize:vertical;outline:none}
+.fr input:focus,.fr textarea:focus,.fr select:focus{border-color:var(--O)}
+.fr select option{background:#161616}
+.bsub{width:100%;background:var(--O);color:var(--W);border:none;border-radius:5px;padding:14px;font-size:.97rem;font-weight:700;cursor:pointer;transition:background .2s;font-family:inherit}
+.bsub:hover{background:var(--OV)}
+
+/* REDES SOCIALES */
+.redes{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.red-btn{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:8px;text-decoration:none;color:var(--W);font-weight:600;font-size:.85rem;transition:transform .2s,opacity .2s;flex:1;min-width:140px}
+.red-btn:hover{transform:translateY(-2px);opacity:.9}
+.red-fb{background:#1877F2}
+.red-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)}
+.red-tk{background:#000;border:1px solid #333}
+.red-btn svg{width:20px;height:20px;flex-shrink:0}
+
+/* FOOTER */
+footer{background:#070707;padding:36px 6vw;border-top:1px solid #111}
+.footer-main{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-bottom:20px}
+.fb{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--W);letter-spacing:1px}
+.fb em{color:var(--Y);font-style:normal}
+.fsl{font-family:'Dancing Script',cursive;color:var(--O);font-size:.9rem}
+.footer-redes{display:flex;gap:10px}
+.ficon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:transform .2s,opacity .2s}
+.ficon:hover{transform:scale(1.15);opacity:.85}
+.fc{color:#2a2a2a;font-size:.75rem;text-align:center;padding-top:16px;border-top:1px solid #111}
+
+/* FAB WhatsApp */
+.fab{position:fixed;bottom:24px;right:24px;z-index:400;background:#25D366;color:var(--W);width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 18px rgba(37,211,102,.45);transition:transform .2s}
+.fab:hover{transform:scale(1.1)}
+.fab svg{width:28px;height:28px}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  nav ul{display:none}
+  .hero-inner,.cg{grid-template-columns:1fr}
+  .hero-right{order:-1}
+  .h-btns{justify-content:center}
+  .h-stats{justify-content:center}
+  .h-desc{margin:0 auto 32px}
+  .mg,.bg2{grid-template-columns:1fr}
+  .tg{grid-template-columns:1fr;max-width:300px}
+  .dbox{flex-direction:column}
+  .dbanner{justify-content:center;text-align:center}
+  .rc-right{display:none}
+  .rc-pages{grid-template-columns:1fr}
+  .rc-spine{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nl">
+    <img src="fotos/logo.png" alt="EP" onerror="this.src='fotos/logo.jpg'">
+    <div class="nl-t">ENLACE <em>PERFECTO</em></div>
+  </a>
+  <ul>
+    <li><a href="#medios">Medios</a></li>
+    <li><a href="#revista">Revista</a></li>
+    <li><a href="#anunciate">Tarifas</a></li>
+    <li><a href="#beneficios">Beneficios</a></li>
+    <li><a href="#contacto" class="ncta">Anúnciate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="h-tag">📰 Revista quincenal · Impresa y digital</div>
+      <h1 class="h-title">IMPULSA<br><span class="o">TU</span> <span class="y">NEGOCIO</span><br>HOY MISMO</h1>
+      <p class="h-slogan">Información local, conexión real</p>
+      <p class="h-desc">Llega directamente a los hogares y negocios de tu comunidad. Periódico impreso y revista digital hojeable, dos veces al mes.</p>
+      <div class="h-btns">
+        <a href="revista.html" class="bp">📖 Hojear revista</a>
+        <a href="#anunciate" class="bs">Ver tarifas →</a>
+      </div>
+      <div class="h-stats">
+        <div><div class="hs-n">2</div><div class="hs-l">Ediciones/mes</div></div>
+        <div><div class="hs-n">$300</div><div class="hs-l">Desde MXN</div></div>
+        <div><div class="hs-n">100%</div><div class="hs-l">Local</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-ring"></div><div class="hero-ring2"></div>
+      <img src="fotos/logo.png" alt="Enlace Perfecto" class="hero-logo" onerror="this.src='fotos/logo.jpg'">
+    </div>
+  </div>
+</section>
+
+<!-- REVISTA -->
+<section id="revista">
+  <div style="max-width:960px;margin:0 auto;text-align:center">
+    <p class="rev-ey">📖 Edición <span id="rv-num"></span> · <span id="rv-mes"></span></p>
+    <h2 class="rev-title">REVISTA <em>DIGITAL</em></h2>
+    <p class="rev-sub">Hojea nuestra última edición con anuncios, eventos, directorio y clasificados de tu comunidad</p>
+    <a href="revista.html" class="revista-card">
+      <div class="rc-toolbar">
+        <div class="rc-dots">
+          <div class="rc-dot" style="background:#ff5f57"></div>
+          <div class="rc-dot" style="background:#ffbd2e"></div>
+          <div class="rc-dot" style="background:#28c940"></div>
+        </div>
+        <span class="rc-toolbar-title">Enlace Perfecto · Edición <span id="rv-num2"></span> · <span id="rv-mes2"></span></span>
+        <span class="rc-badge">📖 Hojear ahora</span>
+      </div>
+      <div class="rc-pages">
+        <div class="rc-spine"></div>
+        <div class="rc-left">
+          <img src="fotos/ed01/portada.png" alt="Portada" onerror="this.style.display='none'">
+          <div class="rc-cover-overlay">
+            <img src="fotos/logo.png" alt="EP" class="rc-logo" onerror="this.src='fotos/logo.jpg'">
+            <div class="rc-cover-name">ENLACE<br><em>PERFECTO</em></div>
+            <div class="rc-cover-sl">Información local, conexión real</div>
+          </div>
+        </div>
+        <div class="rc-right">
+          <div class="rc-right-head">
+            <span>ENLACE <em>PERFECTO</em></span>
+            <small id="rv-ed2"></small>
+          </div>
+          <div class="rc-item"><div class="rc-pag">Pág. 1–2</div><strong>Anuncios Locales</strong><p>Descuentos y promociones exclusivas de negocios de tu comunidad.</p></div>
+          <div class="rc-item"><div class="rc-pag">Pág. 3–4</div><strong>Anuncios Locales</strong><p>Descuentos y promociones exclusivas de negocios de tu comunidad.</p></div>
+          <div class="rc-item"><div class="rc-pag">Pág. 5–6</div><strong>Anuncios Locales</strong><p>Descuentos y promociones exclusivas de negocios de tu comunidad.</p></div>
+          <div class="rc-item"><div class="rc-pag">Pág. 7–8</div><strong>Clasificados</strong><p>Empleos, ventas, rentas y servicios de la zona.</p></div>
+        </div>
+      </div>
+      <div class="rc-cta">
+        <div class="rc-cta-txt"><strong>📖 Haz clic para hojear la revista completa</strong> — flechas, teclas ← → o swipe</div>
+        <div class="rc-open-btn">Abrir revista →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- MEDIOS -->
+<section id="medios">
+  <div style="max-width:960px;margin:0 auto">
+    <div class="sh">
+      <p class="ey">Nuestros medios</p>
+      <h2 class="sec-t">Presencia impresa y digital</h2>
+      <p class="sub">Tu anuncio llega por dos canales: el periódico que se reparte en la comunidad y la revista digital que cualquiera puede hojear desde su celular.</p>
+    </div>
+    <div class="mg">
+      <div class="mc"><div class="mc-ico">📰</div><div class="mc-tag">Impreso</div><h3>Periódico Local</h3><p>Reparto físico en hogares y negocios de la zona, dos veces al mes. Tu anuncio directamente en manos de tus vecinos.</p><div class="mc-badge">Quincenal · Impreso</div></div>
+      <div class="mc"><div class="mc-ico">📱</div><div class="mc-tag">Digital</div><h3>Revista Digital</h3><p>Publicación online hojeable que se comparte en redes sociales y está disponible desde cualquier dispositivo.</p><div class="mc-badge">Quincenal · Online</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFAS -->
+<section id="anunciate">
+  <div style="max-width:960px;margin:0 auto">
+    <div class="sh">
+      <p class="ey">Tarifas claras</p>
+      <h2 class="sec-t">Elige tu espacio</h2>
+      <p class="sub" style="color:#555">Sin letras chiquitas. Precios accesibles para todo tipo de negocios.</p>
+    </div>
+    <div class="ttabs">
+      <button class="tbt on" onclick="switchTab('e',this)">Por Edición</button>
+      <button class="tbt" onclick="switchTab('m',this)">Paquete Mensual</button>
+    </div>
+    <div id="tc-e" class="tc on">
+      <div class="tg">
+        <div class="tcard"><div class="tsize">¼ de Página</div><div class="tvis" style="width:70px;height:88px"></div><div class="tprice">$300 <span>MXN</span></div><p style="color:#555;font-size:.75rem;margin-top:6px">Por edición</p></div>
+        <div class="tcard feat"><div class="tbadge">⭐ Popular</div><div class="tsize">½ Página</div><div class="tvis" style="width:100px;height:88px"></div><div class="tprice">$550 <span>MXN</span></div><p style="color:#555;font-size:.75rem;margin-top:6px">Por edición</p></div>
+        <div class="tcard"><div class="tsize">Página Completa</div><div class="tvis" style="width:124px;height:88px"></div><div class="tprice">$1,000 <span>MXN</span></div><p style="color:#555;font-size:.75rem;margin-top:6px">Por edición</p></div>
+      </div>
+    </div>
+    <div id="tc-m" class="tc">
+      <div class="tg">
+        <div class="tcard"><div class="tsize">¼ de Página</div><div class="tvis" style="width:70px;height:88px"></div><div class="tprice">$550 <span>MXN</span></div><div class="tsave">💰 Ahorras $50</div><p style="color:#555;font-size:.73rem;margin-top:5px">2 ediciones/mes</p></div>
+        <div class="tcard feat"><div class="tbadge">⭐ Popular</div><div class="tsize">½ Página</div><div class="tvis" style="width:100px;height:88px"></div><div class="tprice">$1,000 <span>MXN</span></div><div class="tsave">💰 Ahorras $100</div><p style="color:#555;font-size:.73rem;margin-top:5px">2 ediciones/mes</p></div>
+        <div class="tcard"><div class="tsize">Página Completa</div><div class="tvis" style="width:124px;height:88px"></div><div class="tprice">$1,800 <span>MXN</span></div><div class="tsave">💰 Ahorras $200</div><p style="color:#555;font-size:.73rem;margin-top:5px">2 ediciones/mes</p></div>
+      </div>
+    </div>
+    <div class="dbox">
+      <div style="font-size:2.2rem;flex-shrink:0">🖥️</div>
+      <div>
+        <h3>¿No tienes diseño? ¡Lo hacemos por ti!</h3>
+        <ul>
+          <li>Diseño de anuncio por solo $50 MXN</li>
+          <li>Incluye hasta 2 cambios sin costo adicional</li>
+          <li>A partir del 3er cambio, $20 MXN por modificación</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios">
+  <div style="max-width:960px;margin:0 auto">
+    <div class="sh">
+      <p class="ey">¿Por qué anunciarte?</p>
+      <h2 class="sec-t">Beneficios reales para tu negocio</h2>
+    </div>
+    <div class="bg2">
+      <div class="bi"><div class="bin">01</div><div><h4>Llegas directo a la comunidad</h4><p>Tu anuncio va a hogares y negocios de tu colonia donde están tus clientes.</p></div></div>
+      <div class="bi"><div class="bin">02</div><div><h4>Dos ediciones al mes</h4><p>Publicación quincenal que mantiene tu presencia constante frente a tu audiencia.</p></div></div>
+      <div class="bi"><div class="bin">03</div><div><h4>Impreso + Digital</h4><p>Tu anuncio aparece en periódico físico y revista digital. Doble alcance, mismo precio.</p></div></div>
+      <div class="bi"><div class="bin">04</div><div><h4>Precios accesibles</h4><p>Planes para cualquier tamaño de negocio, desde emprendedores hasta comercios.</p></div></div>
+      <div class="bi"><div class="bin">05</div><div><h4>Mayor visibilidad</h4><p>A más personas que te conocen, más oportunidades de venta para tu negocio.</p></div></div>
+      <div class="bi"><div class="bin">06</div><div><h4>Espacios limitados</h4><p>Pocos anunciantes por edición garantizan atención real a tu anuncio.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="dbanner">
+  <div>
+    <h2>🌐 Tu anuncio también tiene presencia digital</h2>
+    <p>Al anunciarte apareces en periódico impreso y revista digital. Más alcance, mismo precio.</p>
+  </div>
+  <a href="#contacto" class="bp" style="white-space:nowrap;flex-shrink:0">Reserva tu espacio →</a>
+</div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div style="max-width:960px;margin:0 auto">
+    <div class="sh">
+      <p class="ey">¡Hablemos!</p>
+      <h2 class="sec-t">Reserva tu espacio hoy</h2>
+      <p class="sub">Los espacios son limitados. Escríbenos antes de que se llenen.</p>
+    </div>
+    <div class="cg">
+
+      <!-- Columna izquierda: contacto + redes -->
+      <div>
+        <div class="citems">
+          <a href="#" id="link-wa" class="cit" target="_blank">
+            <span class="cit-ico">💬</span>
+            <div><div class="cit-l">WhatsApp</div><div class="cit-v" id="txt-wa">—</div></div>
+          </a>
+          <a href="#" id="link-tel" class="cit">
+            <span class="cit-ico">📞</span>
+            <div><div class="cit-l">Teléfono</div><div class="cit-v" id="txt-tel">—</div></div>
+          </a>
+          <a href="#" id="link-mail" class="cit">
+            <span class="cit-ico">✉️</span>
+            <div><div class="cit-l">Correo</div><div class="cit-v" id="txt-mail">—</div></div>
+          </a>
+          <div class="cit" style="cursor:default">
+            <span class="cit-ico">📍</span>
+            <div><div class="cit-l">Cobertura</div><div class="cit-v" id="txt-dir">—</div></div>
+          </div>
+        </div>
+
+        <!-- Redes sociales -->
+        <div class="redes">
+          <a href="#" id="link-fb" class="red-btn red-fb" target="_blank">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="#" id="link-ig" class="red-btn red-ig" target="_blank">
+            <svg viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="white" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="2"/></svg>
+            Instagram
+          </a>
+          <a href="#" id="link-tk" class="red-btn red-tk" target="_blank">
+            <svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.77a4.85 4.85 0 0 1-1.03-.08z"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna derecha: formulario -->
+      <div class="cform">
+        <div class="fr"><label>Nombre de tu negocio</label><input type="text" id="f-negocio" placeholder="Ej. Restaurante El Buen Sabor"></div>
+        <div class="fr"><label>Tu nombre</label><input type="text" id="f-nombre" placeholder="¿Cómo te llamamos?"></div>
+        <div class="fr"><label>WhatsApp o teléfono</label><input type="tel" id="f-telefono" placeholder="55 0000 0000"></div>
+        <div class="fr"><label>Tamaño de anuncio</label>
+          <select id="f-tamano">
+            <option value="">Selecciona una opción</option>
+            <option>¼ de página – $300 MXN</option>
+            <option>½ página – $550 MXN</option>
+            <option>Página completa – $1,000 MXN</option>
+            <option>Paquete mensual – desde $550 MXN</option>
+          </select>
+        </div>
+        <div class="fr"><label>Mensaje (opcional)</label><textarea id="f-mensaje" rows="3" placeholder="¿Necesitas diseño? ¿Tienes preguntas?"></textarea></div>
+        <button class="bsub" onclick="enviarWA()">📩 Reservar por WhatsApp</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="fb">ENLACE <em>PERFECTO</em></div>
+      <div class="fsl">Información local, conexión real</div>
+    </div>
+    <div class="footer-redes">
+      <a href="#" id="foot-fb" class="ficon" style="background:#1877F2" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="#" id="foot-ig" class="ficon" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg>
+      </a>
+      <a href="#" id="foot-tk" class="ficon" style="background:#000;border:1px solid #333" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.77a4.85 4.85 0 0 1-1.03-.08z"/></svg>
+      </a>
+      <a href="#" id="foot-wa" class="ficon" style="background:#25D366" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="fc">© 2026 Enlace Perfecto · Todos los derechos reservados</div>
+</footer>
+
+<!-- FAB WhatsApp -->
+<a href="#" id="fab-wa" class="fab" target="_blank" title="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+// ╔═══════════════════════════════════════════════════════════╗
+// ║   ▼▼▼  CAMBIA AQUÍ TUS DATOS  ▼▼▼                       ║
+// ╚═══════════════════════════════════════════════════════════╝
+var DATOS = {
+  // Revista
+  edicion:   "01",
+  mes:       "Julio 2026",
+
+  // Contacto
+  whatsapp:  "5215512345678",          // Con código de país, sin + ni espacios
+  telefono:  "55 1234 5678",
+  correo:    "contacto@enlaceperfecto.com",
+  direccion: "Nicolás Romero, Estado de México",
+
+  // Redes sociales — pon el link completo
+  facebook:  "https://facebook.com/EnlacePerfectoRevista",
+  instagram: "https://instagram.com/enlaceperfecto_revista",
+  tiktok:    "https://tiktok.com/@enlaceperfecto_revista",
+};
+// ╔═══════════════════════════════════════════════════════════╗
+// ║   ▲▲▲  FIN CONFIGURACIÓN — no tocar abajo  ▲▲▲          ║
+// ╚═══════════════════════════════════════════════════════════╝
+
+function init() {
+  // Revista
+  var els = ['rv-num','rv-num2'];
+  for (var i=0;i<els.length;i++) {
+    var e = document.getElementById(els[i]);
+    if (e) e.textContent = '#' + DATOS.edicion;
+  }
+  var mes_els = ['rv-mes','rv-mes2'];
+  for (var i=0;i<mes_els.length;i++) {
+    var e = document.getElementById(mes_els[i]);
+    if (e) e.textContent = DATOS.mes;
+  }
+  var ed2 = document.getElementById('rv-ed2');
+  if (ed2) ed2.textContent = 'Ed. #' + DATOS.edicion + ' · ' + DATOS.mes;
+
+  // Textos de contacto
+  document.getElementById('txt-wa').textContent   = DATOS.whatsapp;
+  document.getElementById('txt-tel').textContent  = DATOS.telefono;
+  document.getElementById('txt-mail').textContent = DATOS.correo;
+  document.getElementById('txt-dir').textContent  = DATOS.direccion;
+
+  // Links de contacto
+  var waURL = 'https://wa.me/' + DATOS.whatsapp;
+  document.getElementById('link-wa').href   = waURL;
+  document.getElementById('link-tel').href = 'https://wa.me/' + DATOS.whatsapp;
+  document.getElementById('link-mail').href = 'mailto:' + DATOS.correo;
+
+  // Redes
+  document.getElementById('link-fb').href = DATOS.facebook;
+  document.getElementById('link-ig').href = DATOS.instagram;
+  document.getElementById('link-tk').href = DATOS.tiktok;
+
+  // Footer redes
+  document.getElementById('foot-fb').href = DATOS.facebook;
+  document.getElementById('foot-ig').href = DATOS.instagram;
+  document.getElementById('foot-tk').href = DATOS.tiktok;
+  document.getElementById('foot-wa').href = waURL;
+
+  // FAB
+  document.getElementById('fab-wa').href = waURL;
+}
+
+// Formulario → WhatsApp
+function enviarWA() {
+  var negocio  = document.getElementById('f-negocio').value.trim();
+  var nombre   = document.getElementById('f-nombre').value.trim();
+  var telefono = document.getElementById('f-telefono').value.trim();
+  var tamano   = document.getElementById('f-tamano').value;
+  var mensaje  = document.getElementById('f-mensaje').value.trim();
+
+  if (!negocio || !nombre || !telefono) {
+    alert('Por favor llena los campos: Nombre de negocio, Tu nombre y Teléfono.');
+    return;
+  }
+
+  var texto = '¡Hola! Quiero anunciarme en Enlace Perfecto 📰\n\n';
+  texto += '🏪 Negocio: ' + negocio + '\n';
+  texto += '👤 Nombre: ' + nombre + '\n';
+  texto += '📞 Teléfono: ' + telefono + '\n';
+  if (tamano)  texto += '📐 Tamaño: ' + tamano + '\n';
+  if (mensaje) texto += '💬 Mensaje: ' + mensaje + '\n';
+
+  var url = 'https://wa.me/' + DATOS.whatsapp + '?text=' + encodeURIComponent(texto);
+  window.open(url, '_blank');
+}
+
+// Tabs tarifas
+function switchTab(k, btn) {
+  document.querySelectorAll('.tc').forEach(function(t){ t.classList.remove('on'); });
+  document.querySelectorAll('.tbt').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById('tc-'+k).classList.add('on');
+  btn.classList.add('on');
+}
+
+init();
+</script>
+</body>
+</html>
